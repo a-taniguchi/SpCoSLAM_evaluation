@@ -5,6 +5,7 @@
 #パーティクル平均の値を取得する
 #Akira Taniguchi (2017/02/23-2018/02/22-2018/09/13)
 #保存ファイル名（プログラム最後の方）と読み込みファイル名の指定に注意
+#2018/09/26 EARの値の計算のために実験試行ごとにEAR値をcsv出力できるようにしたバージョン
 
 import sys
 import string
@@ -205,6 +206,7 @@ if (1):
   
   data = {'step':iteration, 'method':method, 'subject':subject, hyouka:H_M[h]}
   #data2 = {'timepoint':iteration, 'ROI':method, 'subject':subject,'BOLD signal':PAR}
+
   
   df2 = pd.DataFrame(data)
   
@@ -248,7 +250,10 @@ if (1):
   plt.xlabel("step",fontsize=18)
   
   print df2
-  #df2.to_csv("./text"+ hyouka+".csv")
+  df3 = df2.query('step == 50')
+  print df3
+  df3.to_csv(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka+"s.csv")
+  print df3.mean(numeric_only=True)
   
   ######type 1 font#####
   plt.rcParams['ps.useafm'] = True
@@ -257,8 +262,8 @@ if (1):
   
   #fig = AAA.get_figure()
   #plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0.eps', dpi=300)#, transparent=True #eps wa hanntoumei ga muri.
-  plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0s.pdf', dpi=300)#, transparent=True
-  plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0s.png', dpi=300)#, transparent=True
+  #plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0.pdf', dpi=300)#, transparent=True
+  #plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0.png', dpi=300)#, transparent=True
   #h = h+1
   
 #plt.show()

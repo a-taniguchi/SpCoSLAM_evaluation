@@ -3,8 +3,9 @@
 #!/usr/bin/env python
 #時系列データのグラフ描画プログラム、各評価値のstep推移をグラフ化する。（evaluate2ALL2.0用）
 #パーティクル平均の値を取得する
-#Akira Taniguchi (2017/02/23-2018/02/22-2018/09/13)
+#Akira Taniguchi (2017/02/23-2018/02/22)
 #保存ファイル名（プログラム最後の方）と読み込みファイル名の指定に注意
+#RSJ2018用
 
 import sys
 import string
@@ -15,25 +16,26 @@ import pandas as pd
 from __init__ import *
 #import math
 
-#sns.set(style="darkgrid")
-sns.set_style("whitegrid", {'grid.linestyle': '--'})
-current_palette = sns.color_palette()
+sns.set(style="darkgrid")
+#sns.set_style("whitegrid", {'grid.linestyle': '--'})
+#current_palette = sns.color_palette()
 #sns.set_palette("muted")
-#sns.color_palette("muted")
+current_palette = sns.color_palette("muted")
 sns.color_palette(current_palette)
 
 step = 50
-DATA = ['(A) SpCoSLAM','(B) SpCoSLAM with AW','(C) SpCoSLAM with AW+WS','(D) 2.0 (10 FLR)','(E) 2.0 (RS)','(F) 2.0 (10 FLR + RS)','(G1) 2.0 (1 FLR + SBU)','(G2) 2.0 (10 FLR + SBU)','(G3) 2.0 (20 FLR + SBU)']
+DATA = ['(A) SpCoSLAM','(B1) SpCoSLAM 2.0 (LAG:1)','(B2) SpCoSLAM 2.0 (LAG:10)','(B3) SpCoSLAM 2.0 (LAG:20)']
+#','(E) 2.0 (RS)','(F) 2.0 (10 FLR + RS)','(G1) 2.0 (1 FLR + SBU)','(G2) 2.0 (10 FLR + SBU)','(G3) 2.0 (20 FLR + SBU)']
 data1 ='SpCoA'
-HYOUKA = ['NMIc','NMIi',"The number of spatial concepts","The number of position distributions","The number of segmented words","PAR (Word)","PAR (Sentence)","ARIc","ARIi","Calculation time [sec.]","PRR","EAR $L$","EAR $K$"] #"Estimation error of $L$","Estimation error of $K$"]#
+HYOUKA = ['NMIc','NMIi',"The number of spatial concepts","The number of position distributions","The number of segmented words","PARw","PARs","ARIc","ARIi","Calculation time [sec.]","PRR"]
 datasetNUM = 0
 datasetname = datasets[int(datasetNUM)]
-learningdata = ["alg1","alg2wic","alg2wicWS","alg2wicWSLAG10","alg2wicWSlln","alg2wicWSLAG10lln","alg2wicWSLAG1LM","alg2wicWSLAG10LM","alg2wicWSLAG20LM"]
+learningdata = ["alg2wicWS","alg2wicWSLAG1LM","alg2wicWSLAG10LM","alg2wicWSLAG20LM"]
 #["p30a20g10sfix","p30a20g10nfnlsfix","p1a20g10s","batch100a20g10s"]
 
 
 #trialname = raw_input("data_name?(**_m???_NUM) > ")
-hs = raw_input("Evaluation? [NMIc(0),NMIi(1),L(2),K(3),SEG(4),PARwMI(5),PARs(6),ARIc(7),ARIi(8),Time(9),PRR(10),EAR_L(11),EAR_K(12)]> ")
+hs = raw_input("Evaluation? [NMIc(0),NMIi(1),L(2),K(3),SEG(4),PARwMI(5),PARs(6),ARIc(7),ARIi(8),Time(9),PRR(10)]> ")
 h = int(hs)
 data_num1 = '01' #raw_input("data_start_num?(DATA_**) > ")
 data_num2 = '06' #raw_input("data_end_num?(DATA_**) > ")
@@ -55,9 +57,6 @@ ESEG_M = [0.0 for c in xrange(len(DATA)*step*N)]
 TSEG_M = [0.0 for c in xrange(step)]
 PSEG_M = [0.0 for c in xrange(step)]
 PRR_M = [0.0 for c in xrange(len(DATA)*step*N)]
-TIME_M = [0.0 for c in xrange(len(DATA)*step*N)]
-EAR_L_M   = [0.0 for c in xrange(len(DATA)*step*N)]
-EAR_K_M   = [0.0 for c in xrange(len(DATA)*step*N)]
 #PAR = [0.0]*len(DATA)*step*N  #np.random.normal(0.5, 0.5, 500)
 i = 0
 #d = 0
@@ -92,12 +91,12 @@ for d in xrange(len(DATA)):
         PRR_M[d*N + (i-1)*len(DATA)*N + s] = float(itemList[0])
       i = i + 1
     
-    if(h == 9):
+    if(h != 10):
       i = 1
       for line in open(datafolder + trialname + str(s+1).zfill(3) + '/time_step.txt', 'r'): #_meanEvaluationPRR2.csv
         itemList = line[:-1].split(',')
         if (itemList[0] != '') and (i <= step):
-          TIME_M[d*N + (i-1)*len(DATA)*N + s] = float(itemList[1])
+          PRR_M[d*N + (i-1)*len(DATA)*N + s] = float(itemList[1])
         i = i + 1
 
     i = 0
@@ -106,10 +105,8 @@ for d in xrange(len(DATA)):
       if (i != 0) and (itemList != '') and (i <= step):
         PSEG_M[i-1] = float(itemList[0])
       i = i + 1
-    
 
-
-H_M = [NMIc_M,NMIi_M,EL_M,EK_M,ESEG_M,PARw_M,PARs_M,ARIc_M,ARIi_M,TIME_M,PRR_M,EAR_L_M,EAR_K_M]
+H_M = [NMIc_M,NMIi_M,EL_M,EK_M,ESEG_M,PARw_M,PARs_M,ARIc_M,ARIi_M,PRR_M,PRR_M]
 #h = 0
 #for hyouka in HYOUKA:
 if (1):
@@ -170,38 +167,6 @@ if (1):
     method = method + ["Morpheme" for i in range(step)] + ["Phrase" for i in range(step)]
     subject = subject + [0 for i in range(step)] + [0 for i in range(step)]
     
-  elif(h == 11):
-    #TL_Mを読み込む
-    i = 0
-    for line in open( datasetfolder + datasetname + 'Lnum.csv', 'r'):
-      itemList = line[:].split(',')
-
-      #print itemList
-      TL_M = [int(itemList[j]) for j in range(step)]
-      i = i + 1
-    print len(TL_M),TL_M
-    #EARの計算
-    for i in range(step):
-      for s in range(N):
-        for d in range(len(DATA)):
-          EAR_L_M[d*N + (i)*len(DATA)*N + s] =max( 1.0 - abs( EL_M[d*N + (i)*len(DATA)*N + s] - TL_M[i] )/TL_M[i], 0)
-    #EL_M[d*N + (i-1)*len(DATA)*N + s] abs( EL_M[d*N + (i)*len(DATA)*N + s] - TL_M[i] ) #
-    H_M[h] = EAR_L_M
-  
-  elif(h == 12):
-    #TK_Mを読み込む
-    i = 0
-    for line in open( datasetfolder + datasetname + 'Knum.csv', 'r'):
-      itemList = line[:].split(',')
-      TK_M = [int(itemList[j]) for j in range(step)]
-      i = i + 1
-    #EARの計算
-    for i in range(step):
-      for s in range(N):
-        for d in range(len(DATA)):
-          EAR_K_M[d*N + (i)*len(DATA)*N + s] =max( 1.0 - abs( EK_M[d*N + (i)*len(DATA)*N + s] - TK_M[i] )/TK_M[i], 0)
-    #EL_M[d*N + (i-1)*len(DATA)*N + s] abs( EK_M[d*N + (i)*len(DATA)*N + s] - TK_M[i] ) #
-    H_M[h] = EAR_K_M
   
   data = {'step':iteration, 'method':method, 'subject':subject, hyouka:H_M[h]}
   #data2 = {'timepoint':iteration, 'ROI':method, 'subject':subject,'BOLD signal':PAR}
@@ -218,16 +183,13 @@ if (1):
   #print method
   #print H_M[h]
   AAA = sns.tsplot(data=df2, time="step", unit="subject",condition="method", value=hyouka)  
-  plt.subplots_adjust(bottom=0.15, top=0.9, wspace=None, hspace=None)
+  plt.subplots_adjust(bottom=0.15, top=0.85, wspace=None, hspace=None)
   #left=0.60, , right=0.85, top=0.9800
   
   #A = np.array([[0,1,0,1,0,1,0,1], [1,0,1,0,1,0,1,0], [.5,.5,.5,.5,.5,.5,.5,.5]]), ci=10
   for i in range(len(DATA)):
     AAA.lines[i].set_marker(markers[i])
-  location = 'upper left'
-  if (h == 11 or h == 12):
-    location = 'lower right'
-  AAA.legend(loc=location,ncol=1,fontsize=12,labelspacing = 0.4) #prop={'size':10})#title='method','upper left'
+  AAA.legend(loc='upper left',ncol=1,fontsize=16,labelspacing = 0.4) #prop={'size':10})#title='method',
   #sns.tsplot(A, ci=50)
   #print np.std([0,1,0.5])
   if (h == 2 or h == 3):
@@ -238,14 +200,12 @@ if (1):
     plt.ylim([0.0,0.6])
   elif (h == 6):
     plt.ylim([0.0,1.0])
-  elif (h == 11 or h == 12):
-    plt.ylim([0.0,1.0]) #5
   else:
     plt.ylim([0.0,1.0])
-  plt.xticks(fontsize=16)
-  plt.yticks(fontsize=16)
-  plt.ylabel(hyouka,fontsize=18)
-  plt.xlabel("step",fontsize=18)
+  plt.xticks(fontsize=18)
+  plt.yticks(fontsize=18)
+  plt.ylabel(hyouka,fontsize=20)
+  plt.xlabel("step",fontsize=20)
   
   print df2
   #df2.to_csv("./text"+ hyouka+".csv")
@@ -257,8 +217,8 @@ if (1):
   
   #fig = AAA.get_figure()
   #plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0.eps', dpi=300)#, transparent=True #eps wa hanntoumei ga muri.
-  plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0s.pdf', dpi=300)#, transparent=True
-  plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0s.png', dpi=300)#, transparent=True
+  plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0_RSJ.pdf', dpi=300)#, transparent=True
+  plt.savefig(datafolder + '/Evaluation/' + trialname + '_' + data_num1 + '_' + data_num2 +  '_' + hyouka + '2_ALL2.0_RSJ.png', dpi=300)#, transparent=True
   #h = h+1
   
 #plt.show()

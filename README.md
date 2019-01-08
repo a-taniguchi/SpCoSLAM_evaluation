@@ -1,9 +1,9 @@
 # Evaluation / Visualization for SpCoSLAM data  
 
 These files are the codes for the evaluation or the visualization in SpCoSLAM.  
-It is the codes for our experiment in IROS paper.  
+These codes were used for experiments in our IROS paper.  
 
-It includes cluttered codes and unused codes.  
+[Note] It includes cluttered codes and unused codes.  
 
 -----
 [How to visualize the position distributions on rviz]  
@@ -20,14 +20,15 @@ In case of individual specification
 If you use this program to publish something, please describe the following citation information.  
 
 Reference  
-Akira Taniguchi, Yoshinobu Hagiwara, Tadahiro Taniguchi, and Tetsunari Inamura, "Online Spatial Concept and Lexical Acquisition with Simultaneous Localization and Mapping", IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS2017), 2017.  
-Original paper: https://arxiv.org/abs/1704.04664  
+- Akira Taniguchi, Yoshinobu Hagiwara, Tadahiro Taniguchi, and Tetsunari Inamura, "Online Spatial Concept and Lexical Acquisition with Simultaneous Localization and Mapping", IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS2017), 2017.  
+    - Original paper: https://arxiv.org/abs/1704.04664  
 
-Akira Taniguchi, Yoshinobu Hagiwara, Tadahiro Taniguchi, and Tetsunari Inamura, "SpCoSLAM 2.0: An Improved and Scalable Online Learning of Spatial Concepts and Language Models with Mapping", arXiv:1803.03481, 2018. (Preprint submitted to IROS2018)  
-Original paper: https://arxiv.org/abs/1803.03481  
+- Akira Taniguchi, Yoshinobu Hagiwara, Tadahiro Taniguchi, and Tetsunari Inamura, "An Improved and Scalable Online Learning of Spatial Concepts and Language Models with Mapping", arXiv:1803.03481, 2018. (Preprint submitted)  
+    - Original paper: https://arxiv.org/abs/1803.03481  
 
 
 Sample video: https://youtu.be/z73iqwKL-Qk
 
 
-2018/05/18 Akira Taniguchi
+2018/05/18 Akira Taniguchi  
+2019/01/08 Akira Taniguchi (update)  

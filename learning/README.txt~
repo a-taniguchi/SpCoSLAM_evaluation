@@ -35,14 +35,12 @@ meanEvaluate_tsplot.py:ŽžŒn—ñƒf[ƒ^‚ÌƒOƒ‰ƒt•`‰æƒvƒƒOƒ‰ƒ€AŠe•]‰¿’l‚Ìstep„ˆÚ‚ðƒ
 meanEvaluate_tsplot2.0.py:ŽžŒn—ñƒf[ƒ^‚ÌƒOƒ‰ƒt•`‰æƒvƒƒOƒ‰ƒ€AŠe•]‰¿’l‚Ìstep„ˆÚ‚ðƒOƒ‰ƒt‰»‚·‚éBievaluate2_MI—pjƒp[ƒeƒBƒNƒ‹•½‹Ï‚Ì’l‚ðŽæ“¾‚·‚é 2.0
 meanEvaluate_tsplot2.py:ŽžŒn—ñƒf[ƒ^‚ÌƒOƒ‰ƒt•`‰æƒvƒƒOƒ‰ƒ€AŠe•]‰¿’l‚Ìstep„ˆÚ‚ðƒOƒ‰ƒt‰»‚·‚éB(‚È‚É‚©‚Ì‚½‚ß‚É‰¼Žg—p‚µ‚½‚â‚Â)
 meanEvaluate_tsplot3.py:ŽžŒn—ñƒf[ƒ^‚ÌƒOƒ‰ƒt•`‰æƒvƒƒOƒ‰ƒ€AŠe•]‰¿’l‚Ìstep„ˆÚ‚ðƒOƒ‰ƒt‰»‚·‚éBÅ‘å–Þ“x‚Ìƒp[ƒeƒBƒNƒ‹‚Ì•]‰¿’l‚ðŽæ“¾‚·‚é
-
 new_place_draw.pyFŠwK‚µ‚½êŠ—Ìˆæ‚ÌƒTƒ“ƒvƒ‹‚ðrvizã‚É‰ÂŽ‹‰»‚·‚éƒvƒƒOƒ‰ƒ€(Î•šiƒTƒ“ƒvƒ‹ƒvƒƒbƒgj¨ˆé•ÓiƒKƒEƒXŠTŒ`j¨²)
-new_place_draw_online.pyFƒIƒ“ƒ‰ƒCƒ“‰ÂŽ‹‰»—piˆÊ’u•ª•z‚Æƒƒ{ƒbƒgŽ©ŒÈˆÊ’u‚ðƒXƒeƒbƒv‚²‚Æ‚ÉROSƒgƒsƒbƒN‚ð‘—‚éj
+new_place_draw_online.pyFƒIƒ“ƒ‰ƒCƒ“‰ÂŽ‹‰»—p
 new_position_draw_online.pyFƒƒ{ƒbƒg‚ÌŽ©ŒÈˆÊ’u•`‰æ—p
-
-pcolor_small_W.pyFŠwKŒ‹‰Ê‚Ì’PŒê•ª•z‚É‚¨‚¯‚éŠm—¦’l‚ÌƒJƒ‰[ƒ}ƒbƒv•`‰æ
-pcolor_small_WMI.pyFŠwKŒ‹‰Ê‚Ì’PŒê•ª•z‚É‚¨‚¯‚éŠm—¦’l‚ÌƒJƒ‰[ƒ}ƒbƒv•`‰æiMId‚Ý•t‚¯j
-pcolor_small_phi2.pyFˆÊ’u•ª•z‚Ìindex‚Ì‘½€•ª•z‚É‚¨‚¯‚éŠm—¦’l‚ÌƒJƒ‰[ƒ}ƒbƒv•`‰æ
+pcolor_small_W.pyFŠwKŒ‹‰Ê‚Ì’PŒê•ª•z‚ÌƒJƒ‰[ƒ}ƒbƒv•`‰æ
+pcolor_small_WMI.pyFŠwKŒ‹‰Ê‚Ì’PŒê•ª•z‚ÌƒJƒ‰[ƒ}ƒbƒv•`‰æiMId‚Ý•t‚¯j
+pcolor_small_phi2.pyFˆÊ’u•ª•z‚Ìindex‚Ì‘½€•ª•z‚ÌƒJƒ‰[ƒ}ƒbƒv•`‰æ
 
 saveSpCoMAP.rvizFrvizƒtƒ@ƒCƒ‹
 saveSpCoMAP_online.rvizFrvizƒtƒ@ƒCƒ‹iƒIƒ“ƒ‰ƒCƒ“•`‰æ—pj
